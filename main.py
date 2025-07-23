@@ -24,15 +24,9 @@ def read_root():
 
 @app.get("/employees", response_model=List[Employee])
 def get_employees():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT Id, Name, Department, Email FROM Employees")
-    rows = cursor.fetchall()
-    employees = []
-    for row in rows:
-        employees.append(Employee(Id=row[0], Name=row[1], Department=row[2], Email=row[3]))
-    conn.close()
-    return employees
+    return [
+        Employee(Id=1, Name="Test", Department="IT", Email="test@example.com")
+    ]
  
 @app.post("/run_query")
 async def run_query(request: Request):
